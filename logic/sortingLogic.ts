@@ -1,4 +1,4 @@
-import type { PairType } from "./inputParse";
+import type { PairType } from "./inputParse.js";
 
 type SortCondition = "key" | "value";
 

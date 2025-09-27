@@ -1,4 +1,4 @@
-import type { PairType } from "./inputParse";
+import type { PairType } from "./inputParse.js";
 export function pairsToXML(pairs: PairType[]): string {
   const xmlPairs = pairs
     .map(
