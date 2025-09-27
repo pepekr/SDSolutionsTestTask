@@ -1,4 +1,9 @@
 import type { PairType } from "./inputParse.js";
+/**
+ * Creates XML string
+ * @param pairs 
+ * @returns 
+ */
 export function pairsToXML(pairs: PairType[]): string {
   const xmlPairs = pairs
     .map(
@@ -8,6 +13,11 @@ export function pairsToXML(pairs: PairType[]): string {
     .join("\n");
   return `<pairs>\n${xmlPairs}\n</pairs>`;
 }
+/**
+ * Downloads xml file
+ * @param xmlString 
+ * @param filename 
+ */
 export function downloadXML(xmlString: string, filename = "data.xml") {
   const blob = new Blob([xmlString], { type: "application/xml" });
   const url = URL.createObjectURL(blob);

@@ -1,5 +1,9 @@
 import type { PairType } from "./inputParse.js";
-
+/**
+ * Functions that add new values to the session object, and overrides the old key values if there a conflict
+ * @param objs array of new values
+ * @param storageKey session storage key
+ */
 export function addToSession(objs: PairType[], storageKey: string) {
   let pairs: PairType[] = JSON.parse(sessionStorage.getItem(storageKey) || "[]");
 
@@ -7,7 +11,12 @@ export function addToSession(objs: PairType[], storageKey: string) {
   pairs.push(...objs);
   sessionStorage.setItem(storageKey, JSON.stringify(pairs));
 }
-
+/**
+ * Checks if newObj has the same key as some objects inside session storage
+ * @param newObj 
+ * @param storageKey 
+ * @returns boolean true - if exists false if not
+ */
 export function isExist(newObj: PairType, storageKey: string) {
   let pairs: PairType[] = JSON.parse(
     sessionStorage.getItem(storageKey) || "[]"
@@ -17,6 +26,11 @@ export function isExist(newObj: PairType, storageKey: string) {
   }
   return false;
 }
+/**
+ * Deleting objects from session storage array
+ * @param objects 
+ * @param storageKey 
+ */
 export function deleteSelected(objects: PairType[], storageKey: string) {
   let pairs: PairType[] = JSON.parse(
     sessionStorage.getItem(storageKey) || "[]"

@@ -3,13 +3,17 @@ import { parseObject, type PairType } from "./logic/inputParse.js";
 import { addToSession, isExist } from "./logic/sessionOperations.js";
 import { sortBy } from "./logic/sortingLogic.js";
 import { downloadXML, pairsToXML } from "./logic/xmlHandler.js";
-
+/**
+ * Helper function to not check every time if element is null
+ * @param id 
+ * @returns 
+ */
 function getElementById<T extends HTMLElement>(id: string) {
   const element = document.getElementById(id) as T;
   if (!element) throw new Error(`Missing element ${id}`);
   return element;
 }
-
+// Elements and constants
 const storageKey = "pairsArray";
 const forbiddenValues = "[^A-Z|a-z|0-9]";
 const addButton = getElementById<HTMLButtonElement>("add-btn");
@@ -20,10 +24,14 @@ const sortByValueButton =
   getElementById<HTMLButtonElement>("sort-by-value-btn");
 const input = getElementById<HTMLInputElement>("pair-input");
 const outputList = getElementById<HTMLUListElement>("obj-list");
-
+// getting pairs once page is loaded 
 getUpdatedPairs(storageKey)
 
-
+/**
+ * parsing new object, checking if the object key in storage already
+ * if yes showing message to additional check
+ * getting updated pairs 
+ */
 addButton.addEventListener("click", () => {
   try {
     const { obj, error } = parseObject(input.value, forbiddenValues, "=");
@@ -50,7 +58,10 @@ addButton.addEventListener("click", () => {
     placeError((error as Error).message);
   }
 });
-
+/**
+ * deletes all selected pairs, before that showing message for additional confirmation
+ * deletes by checking checkboxes in li elements 
+ */
 deleteButton.addEventListener("click",()=>
   {
     let pairs: PairType[] = JSON.parse(
@@ -107,7 +118,11 @@ sortByValueButton.addEventListener("click", () => {
   addToSession(result, storageKey);
   getUpdatedPairs(storageKey);
 });
-
+/**
+ * Gets array of pairs from storage
+ * makes checkbox with pair key as value to track a pair
+ * @param storageKey 
+ */
 export function getUpdatedPairs(storageKey: string) {
   const pairs: PairType[] = JSON.parse(
     sessionStorage.getItem(storageKey) || "[]"

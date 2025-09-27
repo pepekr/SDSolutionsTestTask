@@ -1,3 +1,8 @@
+/**
+ * A helper function that shows a message to the user, and executes a callback when they confirm (click OK
+ * @param text will be displayed to user
+ * @param callbackToProceed a function that will be executed once user clicked "ok"
+ */
 export function placeMessage(text: string, callbackToProceed: () => void) {
   const container = document.createElement("div");
   container.className = "message-container";
@@ -22,7 +27,10 @@ export function placeMessage(text: string, callbackToProceed: () => void) {
 
   document.body.appendChild(container);
 }
-
+/**
+ * Displaying an error 
+ * @param text text that describes an error
+ */
 export function placeError(text: string) {
   const container = document.createElement("div");
   container.className = "error-container";
@@ -36,6 +44,5 @@ export function placeError(text: string) {
   };
   box.appendChild(exitButton);
   container.appendChild(box);
-
   document.body.appendChild(container);
 }

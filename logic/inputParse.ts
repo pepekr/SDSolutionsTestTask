@@ -2,7 +2,13 @@ type validateObjReturn = {
   isValid: boolean;
   error?: string;
 };
-
+/**
+ * 
+ * @param objToValidate string that needs to be validated
+ * @param forbiddenCharactersRegexp regex expression, describes cahracters that are not allowed in object 
+ * @param divider a symbol that divides key from value
+ * @returns returns boolean value (valid/not valid) and error message if not valid
+ */
 export function validateObj(
   objToValidate: string,
   forbiddenCharactersRegexp: string,
@@ -25,6 +31,13 @@ export type PairType = {
   key: string;
   value: string;
 };
+/**
+ * 
+ * @param objToValidate string that needs to be validated
+ * @param forbiddenCharactersRegexp regex expression, describes cahracters that are not allowed in object 
+ * @param divider a symbol that divides key from value
+ * @returns parsed object {key:string, value:string}
+ */
 export function parseObject(
   objToValidate: string,
   forbiddenCharactersRegexp: string,
