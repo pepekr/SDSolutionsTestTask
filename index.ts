@@ -1,13 +1,15 @@
-import { parseObject, type PairType } from "./logic/inputParse";
-import { addToSession, isExist } from "./logic/sessionOperations";
-import { sortBy } from "./logic/sortingLogic";
-import { downloadXML, pairsToXML } from "./logic/xmlHandler";
+import { placeError, placeMessage } from "./logic/htmlLogic.js";
+import { parseObject, type PairType } from "./logic/inputParse.js";
+import { addToSession, isExist } from "./logic/sessionOperations.js";
+import { sortBy } from "./logic/sortingLogic.js";
+import { downloadXML, pairsToXML } from "./logic/xmlHandler.js";
 
 function getElementById<T extends HTMLElement>(id: string) {
   const element = document.getElementById(id) as T;
-  if (!element) throw new Error("Missing element");
+  if (!element) throw new Error(`Missing element ${id}`);
   return element;
 }
+
 const storageKey = "pairsArray";
 const forbiddenValues = "[^A-Z|a-z|0-9]";
 const addButton = getElementById<HTMLButtonElement>("add-btn");
@@ -19,20 +21,32 @@ const sortByValueButton =
 const input = getElementById<HTMLInputElement>("pair-input");
 const outputList = getElementById<HTMLUListElement>("obj-list");
 
+getUpdatedPairs(storageKey)
+
+
 addButton.addEventListener("click", () => {
   try {
-    const result = parseObject(input.value, forbiddenValues, "=");
-    if (!result.obj) {
-      // TODO place an error in html
-      return;
+    const { obj, error } = parseObject(input.value, forbiddenValues, "=");
+
+    if (!obj) {
+      throw new Error(error ?? "Error during object parse");
     }
-    if (isExist(result.obj, storageKey)) {
-      // place message that it will be erased
-      // get button to okay and to cancel
+    if (isExist(obj, storageKey)) {
+      placeMessage(
+        "Your previos value will be erased, ready to procceed?",
+        () => {
+          addToSession([obj], storageKey);
+           
+           return
+        }
+      );
+    } else {
+      addToSession([obj], storageKey);
+      
     }
-    addToSession([result.obj], storageKey);
+    getUpdatedPairs(storageKey);
   } catch (error) {
-    // place an error
+    placeError((error as Error).message);
   }
 });
 
@@ -44,7 +58,7 @@ xmlButton.addEventListener("click", () => {
     const xmlString = pairsToXML(pairs);
     downloadXML(xmlString);
   } catch (error) {
-    // place an error in html
+    placeError("Error during xml download");
   }
 });
 sortByNameButton.addEventListener("click", () => {
@@ -53,6 +67,7 @@ sortByNameButton.addEventListener("click", () => {
   );
   const result = sortBy(pairs, "key");
   addToSession(result, storageKey);
+  getUpdatedPairs(storageKey);
 });
 
 sortByValueButton.addEventListener("click", () => {
@@ -61,4 +76,17 @@ sortByValueButton.addEventListener("click", () => {
   );
   const result = sortBy(pairs, "value");
   addToSession(result, storageKey);
+  getUpdatedPairs(storageKey);
 });
+
+export function getUpdatedPairs(storageKey: string) {
+  const pairs: PairType[] = JSON.parse(
+    sessionStorage.getItem(storageKey) || "[]"
+  );
+  outputList.innerHTML = ""
+  pairs.forEach((pair) => {
+    const li = document.createElement("li");
+    li.textContent = `${pair.key}=${pair.value}`;
+    outputList.appendChild(li);
+  });
+}
