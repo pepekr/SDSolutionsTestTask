@@ -21,7 +21,7 @@ export function validateObj(
   }
 }
 
-type PairType = {
+export type PairType = {
   key: string;
   value: string;
 };
