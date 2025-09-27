@@ -114,11 +114,14 @@ export function getUpdatedPairs(storageKey: string) {
   outputList.innerHTML = ""
   pairs.forEach((pair) => {
     const li = document.createElement("li");
+    li.className = "pair-li"
     const p = document.createElement("p")
-    p.textContent = `${pair.key}=${pair.value}  `;
+    p.textContent = `${pair.key}=${pair.value}`;
+    p.className = "pair-p"
     const checkbox = document.createElement('input')
     checkbox.value = pair.key;
     checkbox.type = "checkbox"
+    checkbox.className = "pair-deletion-checkbox"
     li.appendChild(p)
     li.appendChild(checkbox)
     outputList.appendChild(li);
