@@ -50,6 +50,34 @@ addButton.addEventListener("click", () => {
   }
 });
 
+deleteButton.addEventListener("click",()=>
+  {
+    let pairs: PairType[] = JSON.parse(
+    sessionStorage.getItem(storageKey) || "[]"
+  );
+    placeMessage("All selected pairs will be deleted, ready to proceed?",()=>
+      {
+        try {
+          const liArr = Array.from(outputList.children) as HTMLLIElement[]
+        liArr.forEach(li=>
+          {
+            const checkbox = li.querySelector("input")
+            if(!checkbox) throw new Error("Checkbox is missing");
+            if(!checkbox.value) throw new Error("Checkbox value is missing")
+            if(checkbox.checked)
+              {
+                pairs = pairs.filter(obj=>obj.key!==checkbox.value)
+              }              
+          })
+        sessionStorage.setItem(storageKey, JSON.stringify(pairs));
+        getUpdatedPairs(storageKey)
+        } catch (error) {
+          placeError((error as Error).message)
+        }
+        
+      })
+  })
+
 xmlButton.addEventListener("click", () => {
   try {
     const pairs: PairType[] = JSON.parse(
