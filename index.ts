@@ -86,7 +86,13 @@ export function getUpdatedPairs(storageKey: string) {
   outputList.innerHTML = ""
   pairs.forEach((pair) => {
     const li = document.createElement("li");
-    li.textContent = `${pair.key}=${pair.value}`;
+    const p = document.createElement("p")
+    p.textContent = `${pair.key}=${pair.value}  `;
+    const checkbox = document.createElement('input')
+    checkbox.value = pair.key;
+    checkbox.type = "checkbox"
+    li.appendChild(p)
+    li.appendChild(checkbox)
     outputList.appendChild(li);
   });
 }
