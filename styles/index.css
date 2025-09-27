@@ -54,3 +54,20 @@ main div.data-div {
   border: 1px solid rgb(150, 145, 147);
   overflow: auto;
 }
+
+.pair-li
+{
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+}
+.pair-li > p
+{
+  font-size: 1.3rem;
+  width: 96%;
+}
+.pair-li > input
+{
+  width: 4%;
+
+}
