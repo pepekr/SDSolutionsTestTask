@@ -44,6 +44,7 @@ addButton.addEventListener("click", () => {
       addToSession([obj], storageKey);
       
     }
+    input.value = ""
     getUpdatedPairs(storageKey);
   } catch (error) {
     placeError((error as Error).message);
