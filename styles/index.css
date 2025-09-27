@@ -1,0 +1,56 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body,
+html {
+  height: 100%;
+}
+
+section[aria-label="object-input-section"] {
+  display: flex;
+  flex-direction: column-reverse;
+  margin-bottom: 0.2rem;
+}
+
+label
+{
+    color: rgb(134, 139, 144);
+    font-size: 0.8rem;
+}
+
+main {
+  display: flex;
+  justify-content: space-between;
+  width: 40%;
+  height: 100%;
+  border: 3px solid red;
+  height: 70%;
+}
+
+main div.data-div {
+  margin: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.logic-buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.logic-buttons button {
+  margin: 1rem;
+}
+#obj-display {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  flex-grow: 1;
+}
+#obj-display > ul {
+  flex: 1;
+  border: 1px solid rgb(150, 145, 147);
+  overflow: auto;
+}
