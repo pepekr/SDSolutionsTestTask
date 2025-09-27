@@ -1,0 +1,39 @@
+.error-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.error-box {
+  position: relative;
+  background-color: rgb(193, 49, 49);
+  padding: 10rem;
+  color: #fff;
+  border-radius: 8px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+.error-box:hover
+{
+  transform: scale(1.05);
+}
+.error-box button {
+  position: absolute;
+  top: 3%;
+  left:95%;
+  padding: 15px;
+  transform: translateX(-100%);
+  border: 1px solid #fff;
+  color: #fff;
+  background-color: rgb(193, 49, 49);
+  margin: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
