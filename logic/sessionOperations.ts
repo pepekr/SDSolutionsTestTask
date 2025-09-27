@@ -1,7 +1,9 @@
-import type { PairType } from "./inputParse";
+import type { PairType } from "./inputParse.js";
 
 export function addToSession(objs: PairType[], storageKey: string) {
-  let pairs: object[] = JSON.parse(sessionStorage.getItem(storageKey) || "[]");
+  let pairs: PairType[] = JSON.parse(sessionStorage.getItem(storageKey) || "[]");
+
+  pairs = pairs.filter((obj)=>objs.every((newObj)=>newObj.key !== obj.key))
   pairs.push(...objs);
   sessionStorage.setItem(storageKey, JSON.stringify(pairs));
 }
