@@ -2,6 +2,7 @@ type validateObjReturn = {
   isValid: boolean;
   error?: string;
 };
+
 export function validateObj(
   objToValidate: string,
   forbiddenCharactersRegexp: string,
@@ -17,5 +18,19 @@ export function validateObj(
     return { isValid: true };
   } catch (error) {
     return { isValid: false, error: (error as Error).message };
+  }
+}
+
+export function parseObject(
+  objToValidate: string,
+  forbiddenCharactersRegexp: string,
+  divider: string
+): { obj?: object; error?: string } {
+  const result = validateObj(objToValidate, forbiddenCharactersRegexp, divider);
+  if (result.isValid) {
+    const splitObjArr = objToValidate.split(divider);
+    return { obj: { [splitObjArr[0]!]: splitObjArr[1] } };
+  } else {
+    return { error: result.error! };
   }
 }
