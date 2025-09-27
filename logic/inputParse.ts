@@ -21,15 +21,19 @@ export function validateObj(
   }
 }
 
+type PairType = {
+  key: string;
+  value: string;
+};
 export function parseObject(
   objToValidate: string,
   forbiddenCharactersRegexp: string,
   divider: string
-): { obj?: object; error?: string } {
+): { obj?: PairType; error?: string } {
   const result = validateObj(objToValidate, forbiddenCharactersRegexp, divider);
   if (result.isValid) {
-    const splitObjArr = objToValidate.split(divider);
-    return { obj: { [splitObjArr[0]!]: splitObjArr[1] } };
+    const [key, value] = objToValidate.split(divider);
+    return { obj: { key: key!, value: value! } };
   } else {
     return { error: result.error! };
   }
