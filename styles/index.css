@@ -14,10 +14,9 @@ section[aria-label="object-input-section"] {
   margin-bottom: 0.2rem;
 }
 
-label
-{
-    color: rgb(134, 139, 144);
-    font-size: 0.8rem;
+label {
+  color: rgb(134, 139, 144);
+  font-size: 0.8rem;
 }
 
 main {
@@ -54,19 +53,106 @@ main div.data-div {
   overflow: auto;
 }
 
-.pair-li
-{
+.pair-li {
   display: flex;
   justify-content: space-between;
   padding: 5px;
 }
-.pair-li > p
-{
+.pair-li > p {
   font-size: 1.3rem;
   width: 96%;
 }
-.pair-li > input
-{
+.pair-li > input {
   width: 4%;
+}
 
+@media (max-width: 600px) {
+  main {
+    width: 100%;
+    flex-direction: column;
+    height: auto;
+  }
+
+  #obj-display > ul {
+    max-height: 200px;
+  }
+  button {
+    padding: 10px;
+  }
+  #pair-input {
+    font-size: 20px !important;
+  }
+  .pair-li > p {
+    font-size: 1.3rem;
+  }
+
+  .pair-li > input {
+    width: 10%;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  main {
+    width: 95%;
+    flex-direction: row;
+    height: 80vh;
+    margin: 0 auto;
+  }
+
+  /* Make input/output wider */
+  .data-div {
+    width: 70%;
+    flex: 3; /* bigger section */
+    display: flex;
+    flex-direction: column;
+  }
+
+  #pair-input {
+    width: 100%; /* full width of data-div */
+    font-size: 1.3rem;
+    padding: 14px 18px;
+  }
+
+  #obj-display {
+    flex: 3; /* bigger output area */
+    margin-top: 1rem;
+  }
+
+  #obj-display > ul {
+    max-height: 450px; /* bigger scroll area */
+    font-size: 1.2rem;
+    padding: 12px;
+    width: 100%; /* fill container */
+  }
+
+  /* Buttons pushed to the right */
+  .logic-buttons {
+    width: 30%;
+    /* flex: 1; */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* push to right */
+    justify-content: flex-start;
+   
+  }
+
+  .logic-buttons button {
+    margin: 0.5rem 0;
+    padding: 14px 28px;
+    font-size: 1.1rem;
+    border-radius: 10px;
+  }
+
+  /* Adjust labels */
+  label {
+    font-size: 1rem;
+  }
+
+  .pair-li > p {
+    font-size: 1.3rem;
+  }
+
+  .pair-li > input {
+    width: 12%;
+  }
 }
