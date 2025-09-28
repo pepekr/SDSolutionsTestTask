@@ -15,4 +15,12 @@ This will generate JavaScript files in the dist folder (as configured in tsconfi
 
 **Run**
 
-Open your index.html in a browser. The compiled JavaScript from dist will be loaded automatically.
+Since browsers block file:// imports, you need to run index.html on a local server.
+
+**npm install -g serve**
+
+**serve .**
+
+Open the URL shown in the console (usually http://localhost:3000) in your browser..
+
+The compiled JavaScript from dist will be loaded automatically.
